@@ -1,4 +1,30 @@
+import 'location.dart';
+import 'networking.dart';
+
 class WeatherModel {
+  Future<dynamic> getlocdata() async {
+    double lat, lon;
+    String url;
+    Location loc = Location();
+    await loc.getloc();
+    lat = loc.lat;
+    lon = loc.lon;
+    url =
+        'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=9b25066d1b2b805c141bbbbf66dc4145&units=metric';
+    Net det = Net(url);
+    var json = await det.jso();
+    return json;
+  }
+
+  Future<dynamic> getcitydata(String city) async {
+    String url =
+        'https://api.openweathermap.org/data/2.5/weather?q=$city&appid=9b25066d1b2b805c141bbbbf66dc4145&units=metric';
+    Net det = Net(url);
+    var json = await det.jso();
+
+    return json;
+  }
+
   String getWeatherIcon(int condition) {
     if (condition < 300) {
       return '🌩';
