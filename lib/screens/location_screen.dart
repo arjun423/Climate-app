@@ -14,7 +14,7 @@ class _LocationScreenState extends State<LocationScreen> {
   double temp;
   String city;
   int id;
-  bool k = false;
+  bool k = true;
 
   void update(dynamic json) {
     setState(() {
@@ -27,10 +27,10 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   Widget build(BuildContext context) {
     dynamic json;
-    if (!k) {
+    if (k) {
       json = widget.json;
       update(json);
-      k = true;
+      k = false;
     }
 
     WeatherModel wm = WeatherModel();
